@@ -20,8 +20,10 @@ alias restart='sudo reboot'
 # +------------+
 bind 'set show-all-if-ambiguous on'     # show list immediately instead of beeping
 bind 'set completion-ignore-case on'    # case insensitive matching
+bind 'set menu-complete-display-prefix on'   # first Tab shows list, second Tab starts cycling
 bind 'TAB:menu-complete'                # Tab cycles forward through suggestions
 bind '"\e[Z":menu-complete-backward'    # Shift+Tab cycles backward
+
 # +-----+
 # | Git |
 # +-----+
@@ -150,3 +152,55 @@ fi
 PROMPT_COMMAND='printf "%$((COLUMNS-1))s\r"'
 
 PS1='\[${_c_user}\]\u@\h\[${_c_reset}\]:\[${_c_blue}\]\w\[${_c_yellow}\]$(_git_branch)\[${_c_reset}\] \$ '
+
+# +-----+
+# | Vim |
+# +-----+
+
+_setup_vim() {
+    local vimrc="$HOME/.vimrc"
+    # Don't overwrite an existing vimrc
+    [[ -f "$vimrc" ]] && return
+
+    cat > "$vimrc" << 'EOF'
+" portable vimrc
+
+" +----------+
+" | Defaults |
+" +----------+
+set nocompatible                " disable vi compatibility mode
+set encoding=utf-8              " use utf-8 internally
+set backspace=indent,eol,start  " allow backspace over indents, line breaks, and insert start
+set updatetime=300              " ms before swap file write and CursorHold triggers
+
+" +---------+
+" | Display |
+" +---------+
+set relativenumber        " show relative distances on all other lines
+set cursorline            " highlight the line the cursor is on
+set scrolloff=8           " keep at least 8 lines visible above and below the cursor
+set wrap                  " visually wrap long lines
+set linebreak             " when wrapping, break at word boundaries instead of mid-word
+
+" +---------+
+" | Editing |
+" +---------+
+set tabstop=4             " a tab character visually spans 4 spaces
+set shiftwidth=4          " indent/dedent by 4 spaces with >> and 
+set expandtab             " insert spaces when Tab is pressed, not a tab character
+set smartindent           " auto-indent new lines based on code syntax
+set autoindent            " copy indent from current line when starting a new line
+
+" +--------+
+" | Search |
+" +--------+
+set incsearch             " jump to matches as you type the search pattern
+set hlsearch              " highlight all matches after search
+set ignorecase            " case insensitive search by default
+set smartcase             " override ignorecase when the pattern contains uppercase
+nnoremap <Esc> :nohlsearch<CR>  " clear search highlights with Esc in normal mode
+
+EOF
+}
+
+_setup_vim
