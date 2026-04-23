@@ -4,14 +4,12 @@
 # +---------+
 # | Helpers |
 # +---------+
-
 # Check if a command exists
 _has() { command -v "$1" &>/dev/null; }
 
 # +--------+
 # | System |
 # +--------+
-
 alias shutdown='sudo shutdown now'
 alias restart='sudo reboot'
 
@@ -27,7 +25,6 @@ bind '"\e[Z":menu-complete-backward'    # Shift+Tab cycles backward
 # +-----+
 # | Git |
 # +-----+
-
 alias g='git'
 alias ga='git add'
 alias gc='git commit -m'
@@ -41,7 +38,6 @@ alias gs='git switch'
 # +------+
 # | Dirs |
 # +------+
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -51,8 +47,6 @@ alias ......='cd ../../../../..'
 # +-----+
 # | ls / eza |
 # +-----+
-# Falls back to plain ls if eza is not installed.
-
 if _has eza; then
     alias l='eza -1 --icons --git -a --no-permissions --no-user --no-filesize --sort=extension --group-directories-first'
     alias lt='eza --tree --level=2 --icons --git --no-permissions --no-user --no-filesize --sort=extension'
@@ -74,7 +68,6 @@ fi
 # +-----+
 # Handles both 'bat' (Arch/Fedora) and 'batcat' (Debian/Ubuntu) installs.
 # Falls back to cat if neither exists.
-
 if _has batcat; then
     alias bat='batcat'
     alias cat='batcat'
@@ -85,7 +78,6 @@ fi
 # +---------+
 # | kubectl |
 # +---------+
-
 if _has kubectl; then
     alias k='kubectl'
 fi
@@ -103,14 +95,13 @@ fi
 # +-------+
 # | Shell |
 # +-------+
-
 # Sane history defaults
 HISTSIZE=10000
 HISTFILESIZE=20000
 HISTCONTROL=ignoreboth   # ignore duplicates and lines starting with space
 shopt -s histappend      # append to history file, don't overwrite
 
-#   auto-correct minor typos
+# auto-correct minor typos
 shopt -s cdspell 2>/dev/null
 
 # Resize terminal output after window resize
@@ -148,7 +139,6 @@ PS1='\[${_c_user}\]\u@\h\[${_c_reset}\]:\[${_c_blue}\]\w\[${_c_yellow}\]$(_git_b
 # +-----+
 # | Vim |
 # +-----+
-
 _setup_vim() {
     local vimrc="$HOME/.vimrc"
     # Don't overwrite an existing vimrc
