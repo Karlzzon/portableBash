@@ -39,14 +39,6 @@ alias gps='git push'
 alias gs='git switch'
 
 # +------+
-# | tmux |
-# +------+
-
-alias tmuxl='tmux list-sessions'
-alias tmuxk='tmux kill-session -t'
-alias tmuxa='tmux attach -t'
-
-# +------+
 # | Dirs |
 # +------+
 
