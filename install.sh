@@ -8,4 +8,3 @@ cp "$DOTFILES_DIR/portableBash.sh" "$HOME/portableBash.sh"
 if ! grep -qF 'portableBash.sh' "$HOME/.bashrc" 2>/dev/null; then
     echo '[ -f ~/portableBash.sh ] && source ~/portableBash.sh' >> "$HOME/.bashrc"
 fi
-source "$HOME/.bashrc"
