@@ -15,6 +15,13 @@ _has() { command -v "$1" &>/dev/null; }
 alias shutdown='sudo shutdown now'
 alias restart='sudo reboot'
 
+# +------------+
+# | Completion |
+# +------------+
+bind 'set show-all-if-ambiguous on'     # show list immediately instead of beeping
+bind 'set completion-ignore-case on'    # case insensitive matching
+bind 'TAB:menu-complete'                # Tab cycles forward through suggestions
+bind '"\e[Z":menu-complete-backward'    # Shift+Tab cycles backward
 # +-----+
 # | Git |
 # +-----+
